@@ -11,56 +11,27 @@
   <title>Привычки и Дела</title>
   <style>
     :root {
-      --bg: #ECEEFF;
-      --surface: #fff;
-      --primary: #4338CA;
-      --primary-light: #EEF2FF;
-      --text: #1E1B4B;
-      --muted: #9CA3AF;
-      --border: #DDDFF8;
-      --done: #059669;
-      --danger: #DC2626;
+      --bg: #ECEEFF; --surface: #fff; --primary: #4338CA;
+      --primary-light: #EEF2FF; --text: #1E1B4B; --muted: #9CA3AF;
+      --border: #DDDFF8; --done: #059669; --danger: #DC2626;
       --safe-top: env(safe-area-inset-top, 20px);
       --safe-bot: env(safe-area-inset-bottom, 0px);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body { height: 100%; overscroll-behavior: none; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-      background: var(--bg); color: var(--text);
-      padding-bottom: calc(32px + var(--safe-bot));
-      -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: var(--bg); color: var(--text); padding-bottom: calc(32px + var(--safe-bot)); -webkit-font-smoothing: antialiased; }
 
-    /* Header */
-    .hdr {
-      position: sticky; top: 0; z-index: 40;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: calc(var(--safe-top) + 6px) 18px 12px;
-    }
+    .hdr { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: calc(var(--safe-top) + 6px) 18px 12px; }
     .hdr h1 { font-size: 19px; font-weight: 800; letter-spacing: -.5px; }
-
-    /* Content */
     .content { padding: 14px 13px; }
 
-    /* Greeting card */
-    .greeting {
-      background: linear-gradient(135deg, #F43F5E 0%, #EC4899 100%);
-      border-radius: 18px; padding: 18px 20px; margin-bottom: 14px;
-      color: #fff; box-shadow: 0 6px 24px rgba(244,63,94,0.35);
-    }
+    /* Greeting */
+    .greeting { background: linear-gradient(135deg, #F43F5E 0%, #EC4899 100%); border-radius: 18px; padding: 18px 20px; margin-bottom: 14px; color: #fff; box-shadow: 0 6px 24px rgba(244,63,94,0.35); }
     .greeting-icon { font-size: 26px; margin-bottom: 8px; }
     .greeting-text { font-size: 16px; font-weight: 600; line-height: 1.6; }
 
-    /* Counter card */
-    .counter {
-      background: linear-gradient(135deg, #4338CA 0%, #7C3AED 100%);
-      border-radius: 18px; padding: 18px 20px; margin-bottom: 20px;
-      color: #fff; display: flex; align-items: center; gap: 16px;
-      box-shadow: 0 6px 24px rgba(67,56,202,0.32);
-    }
+    /* Counter */
+    .counter { background: linear-gradient(135deg, #4338CA 0%, #7C3AED 100%); border-radius: 18px; padding: 18px 20px; margin-bottom: 20px; color: #fff; display: flex; align-items: center; gap: 16px; box-shadow: 0 6px 24px rgba(67,56,202,0.32); }
     .counter-n { font-size: 52px; font-weight: 900; line-height: 1; letter-spacing: -3px; flex-shrink: 0; }
     .counter-lbl { font-size: 15px; font-weight: 600; opacity: .92; line-height: 1.3; }
     .counter-sub { font-size: 12px; opacity: .55; margin-top: 3px; }
@@ -72,37 +43,36 @@
     .btn-add { background: var(--primary-light); border: none; color: var(--primary); font-size: 12.5px; font-weight: 700; font-family: inherit; padding: 5px 13px; border-radius: 20px; cursor: pointer; }
     .btn-add:active { opacity: .7; }
 
-    /* Empty hint */
     .empty { border: 1.5px dashed var(--border); border-radius: 16px; padding: 18px; text-align: center; color: var(--muted); font-size: 13.5px; line-height: 1.5; background: rgba(255,255,255,0.5); }
 
     /* Swipeable row */
     .rw { position: relative; border-radius: 16px; margin-bottom: 8px; overflow: hidden; }
     .rw-del { position: absolute; right: 0; top: 0; bottom: 0; width: 80px; background: var(--danger); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; border-radius: 16px; }
-    .rw-in { position: relative; z-index: 1; background: var(--surface); border-radius: 16px; display: flex; align-items: center; gap: 11px; padding: 12px 13px; box-shadow: 0 1px 4px rgba(99,102,241,0.09); will-change: transform; }
+    .rw-in { position: relative; z-index: 1; background: var(--surface); border-radius: 16px; display: flex; align-items: center; gap: 10px; padding: 12px 12px; box-shadow: 0 1px 4px rgba(99,102,241,0.09); will-change: transform; }
     .rw-in.imp { background: #FFFBEB; box-shadow: 0 1px 4px rgba(217,119,6,0.13); }
 
     /* Habit check (circle) */
     .hc { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .15s, border-color .15s; }
     .hc.done { background: var(--done); border-color: var(--done); }
     .hc.done::after { content: '✓'; color: #fff; font-size: 13px; font-weight: 900; }
-
     .h-name { flex: 1; font-size: 15.5px; font-weight: 500; word-break: break-word; }
-    .h-st { display: flex; flex-direction: column; align-items: flex-end; margin-right: 4px; min-width: 36px; }
+    .h-st { display: flex; flex-direction: column; align-items: flex-end; margin-right: 2px; min-width: 34px; }
     .h-st-n { font-size: 17px; font-weight: 800; line-height: 1; color: var(--primary); }
     .h-st-n.z { color: var(--muted); }
     .h-st-w { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
-    /* Task check (square) */
+    /* Task check (square) — only in important */
     .tc { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--border); background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .15s; }
     .tc.done { background: var(--done); border-color: var(--done); }
     .tc.done::after { content: '✓'; color: #fff; font-size: 12px; font-weight: 900; }
 
     .t-title { flex: 1; font-size: 15px; font-weight: 500; line-height: 1.35; word-break: break-word; }
     .t-title.done { text-decoration: line-through; color: var(--muted); }
-    .t-star { flex-shrink: 0; background: none; border: none; font-size: 21px; cursor: pointer; padding: 0 3px; line-height: 1; transition: transform .12s; }
+    .t-star { flex-shrink: 0; background: none; border: none; font-size: 20px; cursor: pointer; padding: 0 2px; line-height: 1; transition: transform .12s; }
     .t-star:active { transform: scale(.8); }
     .btn-tr { flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; color: #CBD5E1; }
-    .btn-tr:active { color: var(--danger); }
+    .btn-tr:active { color: var(--primary); }
+    .btn-tr.del:active { color: var(--danger); }
     .ico { width: 15px; height: 15px; stroke: currentColor; stroke-width: 2.1; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
     /* Sheet */
@@ -120,7 +90,6 @@
     .s-cancel { background: #F3F4F6; color: #374151; }
     .s-ok { background: var(--primary); color: #fff; }
 
-    /* Snack */
     .snack { position: fixed; bottom: calc(20px + var(--safe-bot)); left: 13px; right: 13px; background: #111827; color: #fff; padding: 13px 16px; border-radius: 14px; font-size: 14px; font-weight: 500; text-align: center; z-index: 60; transform: translateY(120%); transition: transform .3s cubic-bezier(0.25,1,0.5,1); }
     .snack.show { transform: translateY(0); }
   </style>
@@ -137,7 +106,7 @@
   <input class="s-inp" id="sh-inp" type="text" autocapitalize="sentences" autocorrect="on">
   <div class="s-btns">
     <button class="s-btn s-cancel" id="sh-cancel">Отмена</button>
-    <button class="s-btn s-ok" id="sh-ok">Добавить</button>
+    <button class="s-btn s-ok" id="sh-ok">Сохранить</button>
   </div>
 </div>
 <div class="snack" id="snack"></div>
@@ -145,48 +114,43 @@
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
 let S = { habits: [], tasks: [], completedImportantCount: 0 };
-try { const v = localStorage.getItem('ht_v1'); if (v) S = JSON.parse(v); } catch(e) {}
-const save = () => { try { localStorage.setItem('ht_v1', JSON.stringify(S)); } catch(e) {} };
+try {
+  const old = localStorage.getItem('ht_v1');
+  const cur = localStorage.getItem('ht_v2');
+  if (cur) S = JSON.parse(cur);
+  else if (old) { S = JSON.parse(old); localStorage.removeItem('ht_v1'); }
+} catch(e) {}
+const save = () => { try { localStorage.setItem('ht_v2', JSON.stringify(S)); } catch(e) {} };
 
 // ── Utils ──────────────────────────────────────────────────────────────────
 const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
-const esc   = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function taskWord(n) { const r=n%100,r10=n%10; if(r>=11&&r<15)return'дел'; if(r10===1)return'дело'; if(r10>=2&&r10<5)return'дела'; return'дел'; }
 function dayWord(n)  { const r=n%100,r10=n%10; if(r>=11&&r<15)return'дней'; if(r10===1)return'день'; if(r10>=2&&r10<5)return'дня'; return'дней'; }
-
 function calcStreak(h) {
   const dates = new Set(h.doneDates);
   const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   let d = new Date(); d.setHours(0,0,0,0);
   if (!dates.has(fmt(d))) d = new Date(d - 864e5);
-  let n = 0;
-  while (dates.has(fmt(d))) { n++; d = new Date(d - 864e5); }
-  return n;
+  let n = 0; while (dates.has(fmt(d))) { n++; d = new Date(d - 864e5); } return n;
 }
 
-// ── Swipe-to-delete ────────────────────────────────────────────────────────
+// ── Swipe ──────────────────────────────────────────────────────────────────
 let openSwipe = null;
-
 function makeSwipeable(inner) {
   let sx=0, sy=0, tracking=false, opened=false;
-
   const snap = (x, anim=true) => {
     inner.style.transition = anim ? 'transform .22s ease' : 'none';
-    inner.style.transform  = x ? `translateX(${x}px)` : '';
+    inner.style.transform = x ? `translateX(${x}px)` : '';
     opened = x !== 0;
     if (anim) setTimeout(() => inner.style.transition = '', 250);
   };
-
   inner._open  = () => { if (openSwipe && openSwipe !== inner) openSwipe._close(); snap(-80); openSwipe = inner; };
   inner._close = () => { snap(0); if (openSwipe === inner) openSwipe = null; };
-
   inner.addEventListener('touchstart', e => {
     if (openSwipe && openSwipe !== inner) { openSwipe._close(); tracking = false; return; }
-    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
-    tracking = true; inner.style.transition = 'none';
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; tracking = true; inner.style.transition = 'none';
   }, { passive: true });
-
   inner.addEventListener('touchmove', e => {
     if (!tracking) return;
     const dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
@@ -194,17 +158,14 @@ function makeSwipeable(inner) {
     if (dx < 0 && !opened) inner.style.transform = `translateX(${Math.max(dx,-80)}px)`;
     else if (dx > 0 && opened) inner.style.transform = `translateX(${Math.min(dx-80,0)}px)`;
   }, { passive: true });
-
   inner.addEventListener('touchend', e => {
     if (!tracking) return; tracking = false;
     const dx = e.changedTouches[0].clientX - sx;
     if (!opened && dx < -50) inner._open();
     else if (opened && dx > 30) inner._close();
-    else if (!opened) snap(0);
-    else inner._open();
+    else if (!opened) snap(0); else inner._open();
   }, { passive: true });
 }
-
 document.addEventListener('touchstart', e => {
   if (!openSwipe) return;
   const wrap = openSwipe.closest && openSwipe.closest('.rw');
@@ -212,26 +173,29 @@ document.addEventListener('touchstart', e => {
 }, { passive: true });
 
 // ── Operations ─────────────────────────────────────────────────────────────
-function addHabit(name)    { name=name.trim(); if(!name)return; S.habits.push({id:Date.now(),name,doneDates:[]}); save(); render(); }
-function deleteHabit(id)   { S.habits=S.habits.filter(h=>h.id!==id); save(); render(); }
-function toggleHabit(id)   {
+function addHabit(name)   { name=name.trim(); if(!name)return; S.habits.push({id:Date.now(),name,doneDates:[]}); save(); render(); }
+function deleteHabit(id)  { S.habits=S.habits.filter(h=>h.id!==id); save(); render(); }
+function editHabit(id)    { const h=S.habits.find(h=>h.id===id); if(!h)return; openSheet('Редактировать привычку','',v=>{ v=v.trim(); if(!v)return; S.habits=S.habits.map(h=>h.id===id?{...h,name:v}:h); save(); render(); },h.name); }
+function toggleHabit(id)  {
   const t=today();
   S.habits=S.habits.map(h=>h.id!==id?h:{...h,doneDates:h.doneDates.includes(t)?h.doneDates.filter(d=>d!==t):[...h.doneDates,t]});
   save(); render();
 }
-function addTask(title)    { title=title.trim(); if(!title)return; S.tasks.push({id:Date.now(),title,done:false,important:false}); save(); render(); }
-function deleteTask(id)    { S.tasks=S.tasks.filter(t=>t.id!==id); save(); render(); }
-function toggleDone(id)    {
+function addTask(title)   { title=title.trim(); if(!title)return; S.tasks.push({id:Date.now(),title,done:false,important:false}); save(); render(); }
+function deleteTask(id)   { S.tasks=S.tasks.filter(t=>t.id!==id); save(); render(); }
+function editTask(id)     { const t=S.tasks.find(t=>t.id===id); if(!t)return; openSheet('Редактировать дело','',v=>{ v=v.trim(); if(!v)return; S.tasks=S.tasks.map(t=>t.id===id?{...t,title:v}:t); save(); render(); },t.title); }
+function toggleDone(id)   {
   const task=S.tasks.find(t=>t.id===id); if(!task)return;
   const nowDone=!task.done;
   if(task.important) S.completedImportantCount=nowDone?S.completedImportantCount+1:Math.max(0,S.completedImportantCount-1);
-  S.tasks=S.tasks.map(t=>t.id===id?{...t,done:nowDone}:t);
-  save(); render();
+  S.tasks=S.tasks.map(t=>t.id===id?{...t,done:nowDone}:t); save(); render();
 }
-function toggleImp(id)     {
+function toggleImp(id)    {
   const task=S.tasks.find(t=>t.id===id); if(!task)return;
   if(!task.important&&S.tasks.filter(t=>t.important).length>=5){showSnack('В главных уже 5 дел. Сначала уберите одно из них.');return;}
-  S.tasks=S.tasks.map(t=>t.id===id?{...t,important:!t.important}:t);
+  // if removing from important and was done — decrement counter
+  if(task.important&&task.done) S.completedImportantCount=Math.max(0,S.completedImportantCount-1);
+  S.tasks=S.tasks.map(t=>t.id===id?{...t,important:!t.important,done:t.important?false:t.done}:t);
   save(); render();
 }
 
@@ -247,23 +211,25 @@ function showSnack(msg) {
 // ── Sheet ──────────────────────────────────────────────────────────────────
 let shCb=null;
 const ov=document.getElementById('ov'), sh=document.getElementById('sh'), shInp=document.getElementById('sh-inp');
-function openSheet(title,placeholder,cb){
-  shCb=cb; document.getElementById('sh-title').textContent=title;
-  shInp.placeholder=placeholder; shInp.value='';
+function openSheet(title, placeholder, cb, initVal='') {
+  shCb=cb;
+  document.getElementById('sh-title').textContent=title;
+  shInp.placeholder=placeholder; shInp.value=initVal;
   ov.classList.add('open'); sh.classList.add('open');
-  setTimeout(()=>shInp.focus(),330);
+  setTimeout(()=>{ shInp.focus(); if(initVal) shInp.select(); }, 330);
 }
 function closeSheet(){ ov.classList.remove('open'); sh.classList.remove('open'); shInp.blur(); shCb=null; }
 function confirmSheet(){ const v=shInp.value; if(shCb) shCb(v); closeSheet(); }
-
 ov.addEventListener('click',closeSheet);
 document.getElementById('sh-cancel').addEventListener('click',closeSheet);
 document.getElementById('sh-ok').addEventListener('click',confirmSheet);
 shInp.addEventListener('keydown',e=>{ if(e.key==='Enter') confirmSheet(); });
 
-// ── HTML builders ──────────────────────────────────────────────────────────
-const TR = `<svg class="ico" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>`;
+// ── Icons ──────────────────────────────────────────────────────────────────
+const ICO_TRASH  = `<svg class="ico" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>`;
+const ICO_PENCIL = `<svg class="ico" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
 
+// ── HTML builders ──────────────────────────────────────────────────────────
 function bHabit(h) {
   const done=h.doneDates.includes(today()), s=calcStreak(h);
   return `<div class="rw">
@@ -272,49 +238,73 @@ function bHabit(h) {
       <div class="hc${done?' done':''}" data-th="${h.id}"></div>
       <span class="h-name">${esc(h.name)}</span>
       <div class="h-st"><span class="h-st-n${s===0?' z':''}">${s>0?'🔥':''}${s}</span><span class="h-st-w">${dayWord(s)}</span></div>
-      <button class="btn-tr" data-dh="${h.id}">${TR}</button>
+      <button class="btn-tr" data-eh="${h.id}">${ICO_PENCIL}</button>
+      <button class="btn-tr del" data-dh="${h.id}">${ICO_TRASH}</button>
     </div></div>`;
 }
 
-function bTask(t,pfx,imp) {
+// Important task — WITH checkbox, WITHOUT star (already starred), unstar button
+function bTaskImp(t) {
   return `<div class="rw">
     <div class="rw-del" data-dt="${t.id}">Удалить</div>
-    <div class="rw-in${imp?' imp':''}" id="tr${pfx}${t.id}">
+    <div class="rw-in imp" id="tri${t.id}">
       <div class="tc${t.done?' done':''}" data-td="${t.id}"></div>
       <span class="t-title${t.done?' done':''}">${esc(t.title)}</span>
-      <button class="t-star" data-ti="${t.id}">${t.important?'⭐':'☆'}</button>
-      <button class="btn-tr" data-dt="${t.id}">${TR}</button>
+      <button class="t-star" data-ti="${t.id}" title="Убрать из главных">☆</button>
+      <button class="btn-tr" data-et="${t.id}">${ICO_PENCIL}</button>
+      <button class="btn-tr del" data-dt="${t.id}">${ICO_TRASH}</button>
+    </div></div>`;
+}
+
+// Regular task — NO checkbox, with star to add to important
+function bTaskReg(t) {
+  return `<div class="rw">
+    <div class="rw-del" data-dt="${t.id}">Удалить</div>
+    <div class="rw-in" id="tra${t.id}">
+      <span class="t-title">${esc(t.title)}</span>
+      <button class="t-star" data-ti="${t.id}" title="В главные">☆</button>
+      <button class="btn-tr" data-et="${t.id}">${ICO_PENCIL}</button>
+      <button class="btn-tr del" data-dt="${t.id}">${ICO_TRASH}</button>
     </div></div>`;
 }
 
 // ── Render ─────────────────────────────────────────────────────────────────
 function render() {
   openSwipe=null;
-  const cnt=S.completedImportantCount, imp=S.tasks.filter(t=>t.important), ic=imp.length;
+  const cnt=S.completedImportantCount;
+  const impTasks=S.tasks.filter(t=>t.important);
+  const regTasks=S.tasks.filter(t=>!t.important);
+  const ic=impTasks.length;
+
   document.getElementById('app').innerHTML = `
     <div class="greeting">
       <div class="greeting-icon">❤️</div>
       <div class="greeting-text">Дорогая жена, желаю хорошего дня!<br>Я тебя люблю ❤️<br>Ты можешь всё 👑</div>
     </div>
+
     <div class="counter">
       <span class="counter-n">${cnt}</span>
       <div><div class="counter-lbl">${taskWord(cnt)} выполнено</div><div class="counter-sub">из важных дел</div></div>
     </div>
+
     <div class="sec">
       <div class="sec-hdr"><span class="sec-title">Ежедневные привычки</span><button class="btn-add" data-ah>+ Добавить</button></div>
       ${S.habits.length===0?'<div class="empty">Добавьте привычку, которую хотите отмечать каждый день</div>':S.habits.map(bHabit).join('')}
     </div>
+
     <div class="sec">
       <div class="sec-hdr"><span class="sec-title">⭐ Главные дела (${ic}/5)</span><button class="btn-add" data-at>+ Добавить</button></div>
-      ${imp.length===0?'<div class="empty">Нажмите на звёздочку у любого дела, чтобы сделать его главным</div>':imp.map(t=>bTask(t,'i',true)).join('')}
+      ${impTasks.length===0?'<div class="empty">Нажмите ☆ у любого дела, чтобы сделать его главным</div>':impTasks.map(bTaskImp).join('')}
     </div>
+
     <div class="sec">
       <div class="sec-hdr"><span class="sec-title">Все дела</span><button class="btn-add" data-at>+ Добавить</button></div>
-      ${S.tasks.length===0?'<div class="empty">Список пуст — добавьте новое дело кнопкой внизу</div>':S.tasks.map(t=>bTask(t,'a',false)).join('')}
+      ${regTasks.length===0?'<div class="empty">Список пуст — добавьте новое дело кнопкой выше</div>':regTasks.map(bTaskReg).join('')}
     </div>`;
 
   S.habits.forEach(h => { const e=document.getElementById(`hr${h.id}`); if(e) makeSwipeable(e); });
-  S.tasks.forEach(t => ['i','a'].forEach(p => { const e=document.getElementById(`tr${p}${t.id}`); if(e) makeSwipeable(e); }));
+  impTasks.forEach(t => { const e=document.getElementById(`tri${t.id}`); if(e) makeSwipeable(e); });
+  regTasks.forEach(t => { const e=document.getElementById(`tra${t.id}`); if(e) makeSwipeable(e); });
 }
 
 // ── Event delegation ───────────────────────────────────────────────────────
@@ -324,6 +314,8 @@ document.getElementById('app').addEventListener('click', e => {
   const th=e.target.closest('[data-th]'); if(th){toggleHabit(+th.dataset.th);return;}
   const td=e.target.closest('[data-td]'); if(td){toggleDone(+td.dataset.td);return;}
   const ti=e.target.closest('[data-ti]'); if(ti){toggleImp(+ti.dataset.ti);return;}
+  const eh=e.target.closest('[data-eh]'); if(eh){editHabit(+eh.dataset.eh);return;}
+  const et=e.target.closest('[data-et]'); if(et){editTask(+et.dataset.et);return;}
   const ah=e.target.closest('[data-ah]'); if(ah){openSheet('Новая привычка','Название привычки…',addHabit);return;}
   const at=e.target.closest('[data-at]'); if(at){openSheet('Новое дело','Название дела…',addTask);return;}
 });
