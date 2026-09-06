@@ -181,7 +181,8 @@ function toggleHabit(id)  {
   S.habits=S.habits.map(h=>h.id!==id?h:{...h,doneDates:h.doneDates.includes(t)?h.doneDates.filter(d=>d!==t):[...h.doneDates,t]});
   save(); render();
 }
-function addTask(title)   { title=title.trim(); if(!title)return; S.tasks.push({id:Date.now(),title,done:false,important:false}); save(); render(); }
+function addTask(title)      { title=title.trim(); if(!title)return; S.tasks.push({id:Date.now(),title,done:false,important:false}); save(); render(); }
+function addImpTask(title)   { title=title.trim(); if(!title)return; if(S.tasks.filter(t=>t.important).length>=5){showSnack('В главных уже 5 дел. Сначала уберите одно из них.');return;} S.tasks.push({id:Date.now(),title,done:false,important:true}); save(); render(); }
 function deleteTask(id)   { S.tasks=S.tasks.filter(t=>t.id!==id); save(); render(); }
 function editTask(id)     { const t=S.tasks.find(t=>t.id===id); if(!t)return; openSheet('Редактировать дело','',v=>{ v=v.trim(); if(!v)return; S.tasks=S.tasks.map(t=>t.id===id?{...t,title:v}:t); save(); render(); },t.title); }
 function toggleDone(id)   {
@@ -293,7 +294,7 @@ function render() {
     </div>
 
     <div class="sec">
-      <div class="sec-hdr"><span class="sec-title">⭐ Главные дела (${ic}/5)</span><button class="btn-add" data-at>+ Добавить</button></div>
+      <div class="sec-hdr"><span class="sec-title">⭐ Главные дела (${ic}/5)</span><button class="btn-add" data-ait>+ Добавить</button></div>
       ${impTasks.length===0?'<div class="empty">Нажмите ☆ у любого дела, чтобы сделать его главным</div>':impTasks.map(bTaskImp).join('')}
     </div>
 
@@ -316,8 +317,9 @@ document.getElementById('app').addEventListener('click', e => {
   const ti=e.target.closest('[data-ti]'); if(ti){toggleImp(+ti.dataset.ti);return;}
   const eh=e.target.closest('[data-eh]'); if(eh){editHabit(+eh.dataset.eh);return;}
   const et=e.target.closest('[data-et]'); if(et){editTask(+et.dataset.et);return;}
-  const ah=e.target.closest('[data-ah]'); if(ah){openSheet('Новая привычка','Название привычки…',addHabit);return;}
-  const at=e.target.closest('[data-at]'); if(at){openSheet('Новое дело','Название дела…',addTask);return;}
+  const ah=e.target.closest('[data-ah]');  if(ah){openSheet('Новая привычка','Название привычки…',addHabit);return;}
+  const ait=e.target.closest('[data-ait]');if(ait){openSheet('Новое главное дело','Название дела…',addImpTask);return;}
+  const at=e.target.closest('[data-at]');  if(at){openSheet('Новое дело','Название дела…',addTask);return;}
 });
 
 render();
